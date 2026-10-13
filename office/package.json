@@ -1,0 +1,74 @@
+{
+  "name": "lexon-office",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "electron": "electron .",
+    "build:web": "node scripts/build.mjs web",
+    "pack:win": "node scripts/build.mjs win",
+    "dist:win": "next build && electron-builder --win portable nsis",
+    "server": "node server/index.mjs",
+    "build:win": "node scripts/build.mjs win",
+    "build:all": "node scripts/build.mjs all",
+    "optimize:models": "node scripts/optimize-models.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/three": "^0.170.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.5.0",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "better-sqlite3": "^13.0.3",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.170.0",
+    "zustand": "^5.0.0"
+  },
+  "main": "electron/main.js",
+  "description": "LEXON OFFICE desktop",
+  "author": "Lexon",
+  "build": {
+    "appId": "com.lexon.office",
+    "productName": "LEXON OFFICE",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**",
+      "out/**",
+      "server/**",
+      "shared/**",
+      "package.json",
+      "node_modules/better-sqlite3/package.json",
+      "node_modules/better-sqlite3/lib/**",
+      "node_modules/better-sqlite3/prebuilds/win32-x64.node",
+      "!node_modules/better-sqlite3/deps",
+      "!node_modules/better-sqlite3/src",
+      "!**/prebuilds/linux*",
+      "!**/prebuilds/darwin*",
+      "!**/prebuilds/win32-arm64.node"
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/prebuilds/win32-x64.node"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": false
+    }
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^13.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+name: Build Windows app (.exe)
+# Same web build as the website, wrapped in the Electron shell (apps/desktop). Run from the Actions tab (workflow_dispatch).
+on: workflow_dispatch
+jobs:
+  win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+        working-directory: apps/desktop
+      - run: npm run dist:win
+        working-directory: apps/desktop
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      - uses: actions/upload-artifact@v4
+        with: { name: Lexon-Workspace-Windows-installer, path: apps/desktop/dist/*.exe }
