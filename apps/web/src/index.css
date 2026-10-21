@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { @apply bg-canvas text-slate-800 antialiased; font-family: Inter, system-ui, sans-serif; font-feature-settings: 'cv11', 'ss01'; }
+  h1 { letter-spacing: -0.022em; }
+  h2, h3 { letter-spacing: -0.012em; }
+  :focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: #dbe6ff; }
+  * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+}
+@layer components {
+  .card { @apply bg-white border border-line rounded-2xl shadow-card; }
+  .card-hover { @apply transition duration-200 hover:-translate-y-0.5 hover:shadow-pop hover:border-brand/30; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition; }
+  .btn-primary { @apply btn bg-brand text-white shadow-sm hover:bg-blue-700; }
+  .btn-ghost { @apply btn border border-line bg-white text-slate-700 hover:bg-slate-50; }
+}
+
+/* Smooth interactions across the whole app */
+button, a, select, input, textarea { transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .1s ease, opacity .15s ease; }
+button:not(:disabled):active { transform: scale(.975); }
+button:disabled { cursor: not-allowed; }
+button.bg-brand:not(:disabled):hover { background-color: #1d4ed8; box-shadow: 0 6px 16px -6px rgba(37,99,235,.55); }
+input:focus, select:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); outline: none; }
+tbody tr { transition: background-color .12s ease; }
+tbody tr:hover { background-color: #f8fafc; }
+[role='tab'] { position: relative; }
+.draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s ease-out forwards; }
+.bar-grow { transform-origin: bottom; animation: grow .5s ease-out both; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

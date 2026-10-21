@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.env.local
+
+# Local/generated files
+**/.temp/
+*.tsbuildinfo

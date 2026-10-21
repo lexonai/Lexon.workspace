@@ -1,0 +1,28 @@
+# Supabase CLI config (functions). Deploy: supabase functions deploy <name>
+[functions.integrations-oauth]
+verify_jwt = false   # provider redirects here without a JWT; the function verifies a signed state itself
+
+[functions.project-gateway]
+verify_jwt = true
+
+[functions.invite-member]
+verify_jwt = true
+
+[functions.ai-keys]
+verify_jwt = true
+
+[functions.assistant]
+verify_jwt = true
+
+[functions.office-ai]
+verify_jwt = false   # called server-to-server by the Office project; the function checks the x-office-secret header itself
+
+[functions.office-sso]
+verify_jwt = true
+
+# ---- v5 ----
+[functions.central-api]
+verify_jwt = true     # Workspace + Team browsers call this with their Supabase session; Office/Automation are reached only from here
+
+[functions.team-access]
+verify_jwt = false    # public door of the Team app (email + invitation code). Protected by database checks + rate limits, never by the browser

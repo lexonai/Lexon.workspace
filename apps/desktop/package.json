@@ -1,0 +1,26 @@
+{
+  "name": "lexon-workspace-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lexon Workspace desktop shell (Windows / macOS). Loads the same web build as the browser version.",
+  "main": "main.js",
+  "lexonDesktop": { "scheme": "lexon", "productName": "Lexon Workspace", "appId": "app.lexon.workspace" },
+  "scripts": {
+    "dev": "electron .",
+    "build:web": "npm --prefix ../web install && npm --prefix ../web run build",
+    "prepare:web": "node scripts/copy-web.js",
+    "dist:win": "npm run build:web && npm run prepare:web && electron-builder --win",
+    "dist:mac": "npm run build:web && npm run prepare:web && electron-builder --mac"
+  },
+  "devDependencies": { "electron": "^31.0.0", "electron-builder": "^24.13.3" },
+  "build": {
+    "appId": "app.lexon.workspace",
+    "productName": "Lexon Workspace",
+    "files": ["build/icon.png", "main.js", "preload.js", "package.json", "dist-web/**"],
+    "protocols": [{ "name": "Lexon Workspace", "schemes": ["lexon"] }],
+    "icon": "build/icon.png",
+    "win": { "target": "nsis", "icon": "build/icon.png" },
+    "mac": { "target": "dmg", "category": "public.app-category.productivity" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+  }
+}
